@@ -23,7 +23,9 @@ var config = require('../config/webpack.config.dev');
 var paths = require('../config/paths');
 
 var useYarn = pathExists.sync(paths.yarnLockFile);
-var cli = useYarn ? 'yarn' : 'npm';
+var cli = useYarn
+  ? 'yarn'
+  : 'npm';
 var isInteractive = process.stdout.isTTY;
 
 // Warn and crash if required files are missing
@@ -32,7 +34,7 @@ if (!checkRequiredFiles([paths.appHtml, paths.appIndexJs])) {
 }
 
 // Tools like Cloud9 rely on this.
-var DEFAULT_PORT = process.env.PORT || 3000;
+var DEFAULT_PORT = process.env.PORT || 80;
 var compiler;
 var handleCompile;
 
@@ -40,7 +42,7 @@ var handleCompile;
 // We only use this block for testing of Create React App itself:
 var isSmokeTest = process.argv.some(arg => arg.indexOf('--smoke-test') > -1);
 if (isSmokeTest) {
-  handleCompile = function (err, stats) {
+  handleCompile = function(err, stats) {
     if (err || stats.hasErrors() || stats.hasWarnings()) {
       process.exit(1);
     } else {
@@ -127,26 +129,18 @@ function setupCompiler(host, port, protocol) {
 // We need to provide a custom onError function for httpProxyMiddleware.
 // It allows us to log custom error messages on the console.
 function onProxyError(proxy) {
-  return function(err, req, res){
+  return function(err, req, res) {
     var host = req.headers && req.headers.host;
-    console.log(
-      chalk.red('Proxy error:') + ' Could not proxy request ' + chalk.cyan(req.url) +
-      ' from ' + chalk.cyan(host) + ' to ' + chalk.cyan(proxy) + '.'
-    );
-    console.log(
-      'See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (' +
-      chalk.cyan(err.code) + ').'
-    );
+    console.log(chalk.red('Proxy error:') + ' Could not proxy request ' + chalk.cyan(req.url) + ' from ' + chalk.cyan(host) + ' to ' + chalk.cyan(proxy) + '.');
+    console.log('See https://nodejs.org/api/errors.html#errors_common_system_errors for more information (' + chalk.cyan(err.code) + ').');
     console.log();
 
     // And immediately send the proper error response to the client.
     // Otherwise, the request will eventually timeout with ERR_EMPTY_RESPONSE on the client side.
     if (res.writeHead && !res.headersSent) {
-        res.writeHead(500);
+      res.writeHead(500);
     }
-    res.end('Proxy error: Could not proxy request ' + req.url + ' from ' +
-      host + ' to ' + proxy + ' (' + err.code + ').'
-    );
+    res.end('Proxy error: Could not proxy request ' + req.url + ' from ' + host + ' to ' + proxy + ' (' + err.code + ').');
   }
 }
 
@@ -165,9 +159,9 @@ function addMiddleware(devServer) {
     // Modern browsers include text/html into `accept` header when navigating.
     // However API calls like `fetch()` won’t generally accept text/html.
     // If this heuristic doesn’t work well for you, don’t use `proxy`.
-    htmlAcceptHeaders: proxy ?
-      ['text/html'] :
-      ['text/html', '*/*']
+    htmlAcceptHeaders: proxy
+      ? ['text/html']
+      : ['text/html', '*/*']
   }));
   if (proxy) {
     if (typeof proxy !== 'string') {
@@ -282,7 +276,9 @@ function runDevServer(host, port, protocol) {
 }
 
 function run(port) {
-  var protocol = process.env.HTTPS === 'true' ? "https" : "http";
+  var protocol = process.env.HTTPS === 'true'
+    ? "https"
+    : "http";
   var host = process.env.HOST || 'localhost';
   setupCompiler(host, port, protocol);
   runDevServer(host, port, protocol);
@@ -299,10 +295,9 @@ detect(DEFAULT_PORT).then(port => {
   if (isInteractive) {
     clearConsole();
     var existingProcess = getProcessForPort(DEFAULT_PORT);
-    var question =
-      chalk.yellow('Something is already running on port ' + DEFAULT_PORT + '.' +
-        ((existingProcess) ? ' Probably:\n  ' + existingProcess : '')) +
-        '\n\nWould you like to run the app on another port instead?';
+    var question = chalk.yellow('Something is already running on port ' + DEFAULT_PORT + '.' + ((existingProcess)
+      ? ' Probably:\n  ' + existingProcess
+      : '')) + '\n\nWould you like to run the app on another port instead?';
 
     prompt(question, true).then(shouldChangePort => {
       if (shouldChangePort) {
