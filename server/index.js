@@ -1,10 +1,7 @@
-import {
-  makeStore
-}
-from './src/store'
+import makeStore from './src/store'
 import startServer from './src/server';
 
-export var store = makeStore()
+var store = makeStore()
 startServer(store)
 
 store.dispatch({

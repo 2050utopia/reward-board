@@ -1,9 +1,11 @@
-Reward Board - productivity sticker chart and good habit tracker
+# React Reward Board - productivity sticker chart and good habit tracker
 
-Built with react-create-app and redux
+A learning app built with react-create-app and redux
 
+## Live Demo
 
+http://ec2-35-166-192-63.us-west-2.compute.amazonaws.com:81/
 
-To Use:
+## To Use:
 
-Clone, run "npm install" in server and client, then run npm run start in server and client
+Clone, run "npm install" in server and client, then run "npm start" in server and client

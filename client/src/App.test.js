@@ -4,6 +4,7 @@ import App from './App';
 import jsdom from 'jsdom'
 import chai from 'chai'
 import chaiImmutable from 'chai-immutable'
+import {Board_tests} from '../test/components/Board_spec'
 
 var doc = jsdom.jsdom('<!doctype html><html><body></body></html>')
 var win = doc.defaultView
@@ -16,3 +17,5 @@ it('renders without crashing', () => {
   ReactDOM.render(
     <App/>, div);
 });
+
+Board_tests()

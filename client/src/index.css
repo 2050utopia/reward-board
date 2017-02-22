@@ -7,5 +7,7 @@ body {
 .board { display:flex; flex-flow: column-reverse nowrap; height:800px; width:400px;outline: solid thin gray;}
 .stickerRow { position: relative; display: flex; flex-flow: row nowrap; width:100%; height: 5%; }
 .stickerSpot { position:relative; display:block; height:100%; width: 20%; outline: solid thin black; }
-.sticker { background-color: gold; }
+.sticker { background-color: lightyellow; }
 .reverse { flex-direction: row-reverse; }
+
+.test { border:solid thick red }

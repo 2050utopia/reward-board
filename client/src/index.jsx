@@ -1,15 +1,15 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-//import App from './App';
-import Board from './components/Board.jsx'
-import './index.css';
+import React from 'react'
+import ReactDOM from 'react-dom'
+import {Router, Route, hashHistory} from 'react-router'
+import {appEntry, testBoard} from './components/App'
+import Board from './components/Board'
+import './index.css'
 
-var board = {
-  total_size: 100,
-  progress: 39
-}
+const routes = <Route component={appEntry}>
+  <Route path="/" component={Board} />
+</Route>
 
 ReactDOM.render(
-    <Board board={board} />,
-    document.getElementById('root')
-  )
+  <Router history={hashHistory}>{routes}</Router>,
+  document.getElementById('root')
+)

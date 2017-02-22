@@ -1,14 +1,17 @@
 import React from 'react'
+import PureRenderMixin from 'react-addons-pure-render-mixin';
 
 export default React.createClass({
-  addSticker: function(){
-    //this.setState({filled: 1})
+  mixins: [PureRenderMixin],
+  getIndex: function() {
+    return this.props.index
   },
   render: function () {
     var classstr = "stickerSpot"
-    var onclick = () => { this.props.filled(1) }
+    var onclick = () => { this.props.makeProgress(this, this.getIndex()) }
+
     if (this.props.filled === 1) { classstr += " sticker" }
-    else { onclick = () => { this.addSticker() } }
-    return <div className={classstr} onClick={onclick}>{this.props.index}</div>
+
+    return <div className={classstr} onClick={onclick}>{this.getIndex()}</div>
   }
 })
