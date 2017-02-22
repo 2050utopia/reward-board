@@ -2,9 +2,7 @@
 
 A learning app built with react-create-app and redux
 
-## Live Demo
 
-http://ec2-35-166-192-63.us-west-2.compute.amazonaws.com:81/
 
 ## To Use:
 

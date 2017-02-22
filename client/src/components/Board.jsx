@@ -1,7 +1,7 @@
 import React from 'react'
 import StickerRow from './StickerRow'
 import PureRenderMixin from 'react-addons-pure-render-mixin';
-//import {Map} from 'immutable';
+import {Map} from 'immutable';
 
 export default React.createClass({
   mixins: [PureRenderMixin],
